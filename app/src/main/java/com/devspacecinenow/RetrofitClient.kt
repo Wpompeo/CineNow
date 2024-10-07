@@ -12,9 +12,9 @@ object RetrofitClient {
     private val httpClient: OkHttpClient
         get(){
             val clientBuilder = OkHttpClient.Builder()
-            val token = ""
+            val token = BuildConfig.API_KEY
 
-            clientBuilder.addInterceptor {chain ->
+            clientBuilder.addInterceptor { chain ->
                 val original: Request = chain.request()
                 val requestBuilder: Request.Builder = original.newBuilder()
                     .header("Authorization", "Bearer $token")
@@ -26,6 +26,7 @@ object RetrofitClient {
 
     val retrofitInstance: Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
+        .client(httpClient)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 }
