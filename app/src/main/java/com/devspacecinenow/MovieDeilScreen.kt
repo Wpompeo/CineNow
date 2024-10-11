@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -57,6 +58,7 @@ fun MovieDetailScreen(
 
         Column(
             modifier = Modifier.fillMaxSize()
+
         ) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -68,6 +70,7 @@ fun MovieDetailScreen(
                 }) {
                     Icon(
                         imageVector = Icons.Filled.ArrowBack,
+                        tint = Color.White,
                         contentDescription = "Back Button"
                     )
                 }
@@ -80,7 +83,6 @@ fun MovieDetailScreen(
             MovieDetailContent(it)
         }
     }
-
 }
 
 @Composable
@@ -100,20 +102,9 @@ private fun MovieDetailContent(movie: MovieDto) {
             modifier = Modifier.padding(16.dp),
             text = movie.overview,
             fontSize = 16.sp,
+            color = Color.White,
+
         )
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-private fun MovieDetailPreview() {
-    CineNowTheme {
-        val movie = MovieDto(
-            id = 9,
-            title = "Title movie",
-            postPath = "wwwww",
-            overview = " Long overview Long overview Long overview Long overview Long overview Long overview Long overview Long overview",
-        )
-        MovieDetailContent(movie = movie)
-    }
-}

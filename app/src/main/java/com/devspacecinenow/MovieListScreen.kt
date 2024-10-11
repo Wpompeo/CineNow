@@ -1,9 +1,14 @@
 package com.devspacecinenow
 
 import android.util.Log
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,6 +19,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,8 +27,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -42,6 +53,7 @@ fun MovieListScreen(navController: NavHostController) {
     var upComingMovies by remember { mutableStateOf<List<MovieDto>>(emptyList()) }
 
     val apiService = RetrofitClient.retrofitInstance.create(ApiService::class.java)
+
 
     //movies of the moment
     val callNowPlaying = apiService.getNowPlayingMovies()
@@ -162,13 +174,30 @@ private fun MovieListContent(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-
-        Text(
-            modifier = Modifier.padding(8.dp),
-            fontSize = 40.sp,
-            fontWeight = FontWeight.SemiBold,
-            text = "CineNow",
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Text(
+                modifier = Modifier.padding(8.dp),
+                fontSize = 36.sp,
+                fontWeight = FontWeight.SemiBold,
+                text = "CineNow",
+                color = Color.White,
+            )
+            Image(
+                modifier = Modifier
+                    .size(40.dp)
+                    .padding(1.dp)
+                    .clip(CircleShape),
+                painter = painterResource(id = R.drawable._img_play),
+                colorFilter = androidx.compose.ui.graphics.ColorFilter.tint(Color.White),
+                contentDescription = "ImageCinema",
+                contentScale = ContentScale.Crop,
+            )
+        }
 
         MovieSession(
             label = "Top Rated",
@@ -208,9 +237,11 @@ private fun MovieSession(
             .padding(8.dp)
     ) {
         Text(
-            fontSize = 24.sp,
+            fontSize = 17.sp,
             text = label,
-            fontWeight = FontWeight.SemiBold
+            fontStyle = FontStyle.Italic,
+            color = Color.Yellow,
+            fontWeight = FontWeight.ExtraBold
         )
         Spacer(modifier = Modifier.size(8.dp))
         MovieList(movieList = movieList, onClick = onClick)
@@ -251,7 +282,8 @@ private fun MovieItem(
             modifier = Modifier
                 .padding(end = 4.dp)
                 .width(120.dp)
-                .height(150.dp),
+                .height(150.dp)
+                .border(BorderStroke(1.dp, Color.White)),
             contentScale = ContentScale.Crop,
             model = movieDto.posterFullPath,
             contentDescription = "${movieDto.title} Poster image"
@@ -261,12 +293,14 @@ private fun MovieItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             fontWeight = FontWeight.SemiBold,
-            text = movieDto.title
+            text = movieDto.title,
+            color = Color.White,
         )
         Text(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            text = movieDto.overview
+            text = movieDto.overview,
+            color = Color.White,
         )
     }
 }
