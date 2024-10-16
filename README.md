@@ -2,13 +2,19 @@
 CineNow é um aplicativo Android que permite aos usuários explorar filmes populares em tempo real, obtendo informações diretamente da API do The Movie Database (TMDB). Com uma interface amigável, os usuários podem visualizar detalhes de filmes, incluindo sinopse, data de lançamento, classificação, e muito mais.
 
 Funcionalidades
-- Filmes Populares: Visualize uma lista de filmes populares atualizada diariamente.
+- Top Rated: Visualize uma lista com os filmes melhores avaliados.
+- Now Playing: Visualize uma lista com os filmes do momento.
+- Popular: Visualize uma lista de filmes populares atualizada diariamente.
+- Upcoming: Visualize uma lista com os filmes que estão por vir, serem lançados.
 - Detalhes do Filme: Obtenha informações detalhadas sobre cada filme, como título, sinopse, data de lançamento, classificação, e cartaz.
 - Interface Intuitiva: Navegação fácil e design limpo para uma melhor experiência do usuário.
 
 ## :camera_flash: Screenshots
 <!-- You can add more screenshots here if you like -->
-<img src="https://github.com/ComunidadeDevSpace/CineNow/assets/11612508/9690f66d-fb65-4cd7-82db-954473cb6c2d" width=260/> <img src="https://github.com/ComunidadeDevSpace/CineNow/assets/11612508/f8006a40-8855-4d6f-b9b9-a44a8c991fe1" width=260/>
+<img src="https://github.com/user-attachments/assets/b2b03e78-58c7-4d24-9f10-31a1504f4679" width=260/>
+<img src="https://github.com/user-attachments/assets/c3393163-b99c-4d8e-b34e-1fe84aceb141" width=260/>
+<img src="https://github.com/user-attachments/assets/b6ed59c7-fd49-423c-a439-a03ebc0e4dd4" width=260/>
+
 
 
 ## Tecnologias
