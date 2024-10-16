@@ -1,4 +1,4 @@
-package com.devspacecinenow
+package com.devspacecinenow.detail.presentation
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -21,12 +21,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.devspacecinenow.ui.theme.CineNowTheme
+import com.devspacecinenow.ApiService
+import com.devspacecinenow.common.model.MovieDto
+import com.devspacecinenow.common.data.RetrofitClient
 import retrofit2.Call
 import retrofit2.Response
 
