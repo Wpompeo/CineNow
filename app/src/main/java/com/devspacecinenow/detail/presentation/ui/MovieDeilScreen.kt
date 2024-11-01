@@ -1,4 +1,4 @@
-package com.devspacecinenow.detail.presentation
+package com.devspacecinenow.detail.presentation.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
