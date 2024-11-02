@@ -3,13 +3,16 @@ package com.devspacecinenow.list.presentation
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.devspacecinenow.common.data.RetrofitClient
 import com.devspacecinenow.common.model.MovieDto
 import com.devspacecinenow.common.model.MovieResponse
 import com.devspacecinenow.list.data.ListService
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,26 +42,20 @@ class MovieListViewModel(
     }
 
     private fun fetchNowPlayingMovies() {
-        listService.getNowPlayingMovies().enqueue(object : Callback<MovieResponse> {
-            override fun onResponse(
-                call: Call<MovieResponse>,
-                response: Response<MovieResponse>
-            ) {
-                if (response.isSuccessful) {
-                    val movies = response.body()?.results
-                    if (movies != null) {
-                        _uiNowPlaying.value = movies
-                    }
-
-                } else {
-                    Log.d("MovieListViewModel", "Request error :: ${response.errorBody()}")
+        viewModelScope.launch(Dispatchers.IO){
+            val response = listService.getNowPlayingMovies()
+            if (response.isSuccessful) {
+                val movies = response.body()?.results
+                if (movies != null) {
+                    _uiNowPlaying.value = movies
                 }
+
+            } else {
+                Log.d("MovieListViewModel", "Request error :: ${response.errorBody()}")
             }
 
-            override fun onFailure(call: Call<MovieResponse>, t: Throwable) {
-                Log.d("MovieListViewModel", "Network Error :: ${t.message}")
-            }
-        })
+        }
+
     }
 
     private fun fetchTopRatedMovies() {
